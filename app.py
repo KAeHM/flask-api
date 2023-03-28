@@ -1,13 +1,51 @@
 from flask import Flask, request
 from pymongo import MongoClient
 from flask_bcrypt import Bcrypt 
+import xml.etree.ElementTree as ET
 import jwt
+import requests
+import json
 
 
 app = Flask(__name__)
-client = MongoClient('mongodb://mongodb:27017')
+client = MongoClient('mongodb://mondodb:27017')
 db = client['flaskdb']
 bcrypt = Bcrypt(app) 
+
+
+def search_city(cep):
+    api_request = requests.get(f'https://viacep.com.br/ws/{cep}/json/')
+    formated_data = json.loads(api_request.content)
+    return formated_data['localidade']
+
+def search_city_code(city):
+    api_request = requests.get(f'http://servicos.cptec.inpe.br/XML/listaCidades?city={city}')
+    root = ET.ElementTree(ET.fromstring(api_request.content))
+    id = None
+    for child in root.findall("cidade"):
+        id = child.find("id").text
+        break
+    return id
+
+def search_forecast(cep):
+    city = search_city(cep)
+    id = search_city_code(city)
+
+
+    api_request = requests.get(f'http://servicos.cptec.inpe.br/XML/cidade/{id}/previsao.xml')
+    root = ET.ElementTree(ET.fromstring(api_request.content))
+    forecasts = []
+
+    for child in root.findall('previsao'):
+        dia = child.find('dia').text
+        tempo = child.find('tempo').text
+        maxima = child.find('maxima').text
+        minima = child.find('minima').text
+        iuv = child.find('iuv').text
+
+        new_forecast_obj = {"day": dia, "weather": tempo, "max": maxima, "min": minima, 'iuv': iuv}
+        forecasts.append(new_forecast_obj)
+    return forecasts
 
 
 @app.post('/users')
@@ -38,6 +76,14 @@ def acess_token():
         return {'message': token}
     else:
         return {'message': 'invalid user or password'}
+
+@app.post('/forecast')
+def get_forecast():
+    data = request.json
+    cep = data['cep']
+
+    forecasts = search_forecast(cep)
+    return {'message': forecasts}
 
 
 
