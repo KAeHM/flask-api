@@ -13,6 +13,12 @@ Dentro da pasta do projeto suba a aplicação via docker compose. Aqui é import
 
 Nesse caso a flag "-d" irá esconder o terminal que será mostrado e isso pode atrapalhar ao determinar quando o projeto estará pronto para ser utilizado. 
 
->Quando o container do docker é iniciado, o container do elastisearch demora ainda alguns instantes para estar pronto para uso, se você executar qualquer requisição >neste instante o server irá responder com um erro 500, e isso faz o container seja encerrado, fazendo com que você tenha que reinicia-lo. 
+Quando o container do docker é iniciado, o container do elastisearch demora ainda alguns instantes para estar pronto para uso, se você executar qualquer requisição neste instante o server irá responder com um erro 500, isso faz o container ser encerrado, e você terá que reiniciar a aplicação por completo. 
 
-Se você estiver utilizando a tag "-d", você deve aguardar, por segurança, no minimo 30 segundos após a inicialização do container, não deve demorar mais que isso. Agora se você não estiver utilizando, poderá ver o container do "es" estará enviando alguns logs rapidamente, quando esses comandos terminarem de serem executados, a aplicação estará pronta para receber requisições!
+Se você estiver utilizando a tag "-d", você deve aguardar, por segurança, no minimo 30 segundos após a inicialização do container, não deve demorar muito mais que isso. Agora se você não estiver utilizando, poderá ver que o container do "es" estará enviando alguns logs rapidamente, quando esses comandos terminarem de serem executados, a aplicação estará pronta para receber requisições!
+
+
+### Observações 
+Esse projeto utiliza o kibana que é uma aplicação mais pesada, e é bom para se utilizar com o elasticsearch. Entretanto ele é bem robusto fazendo com que seja um projeto pesado, na documentação fala que o minimo de RAM para se rodar esse projeto é 4GB, portanto tenha em mente isso ao rodar na sua maquina.
+
+Pegando com base, a minha maquina tem 8 GB, fica um pouco lento em alguns momentos mas eventualmente ele volta ao normal.
