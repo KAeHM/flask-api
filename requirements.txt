@@ -5,6 +5,8 @@ charset-normalizer
 click
 cryptography
 dnspython
+elastic-transport
+elasticsearch
 Flask
 Flask-Bcrypt
 Flask-UUID
