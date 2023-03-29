@@ -19,6 +19,6 @@ Se você estiver utilizando a tag "-d", você deve aguardar, por segurança, no 
 
 
 ### Observações 
-Esse projeto utiliza o kibana que é uma aplicação mais pesada, e é bom para se utilizar com o elasticsearch. Entretanto ele é bem robusto fazendo com que seja um projeto pesado, na documentação fala que o minimo de RAM para se rodar esse projeto é 4GB, portanto tenha em mente isso ao rodar na sua maquina.
+Esse projeto utiliza o kibana sendo bom para se utilizar com o elasticsearch. Entretanto ele é bem robusto fazendo com que seja um projeto pesado, na documentação oficia o minimo de RAM para se rodar esse projeto é 4GB, portanto tenha em mente isso ao rodar na sua maquina.
 
 Pegando com base, a minha maquina tem 8 GB, fica um pouco lento em alguns momentos mas eventualmente ele volta ao normal.
