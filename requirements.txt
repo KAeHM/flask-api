@@ -5,10 +5,9 @@ charset-normalizer
 click
 cryptography
 dnspython
-elastic-transport
-elasticsearch
 Flask
 Flask-Bcrypt
+flask-swagger-ui
 Flask-UUID
 idna
 itsdangerous
