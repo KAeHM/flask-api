@@ -7,6 +7,7 @@ cryptography
 dnspython
 Flask
 Flask-Bcrypt
+flask-swagger-ui
 Flask-UUID
 idna
 itsdangerous

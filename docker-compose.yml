@@ -4,9 +4,11 @@ services:
   app:
     build: .
     container_name: flask-api
-    command: python -u app.py
+    command: python -u ./src/app.py
     ports:
       - "5000:5000"
+    networks:
+      - es-net
     volumes:
       - .:/app
     links:
@@ -15,6 +17,8 @@ services:
   mongodb:
     image: mongodb/mongodb-community-server
     container_name: mongodb
+    networks:
+      - es-net
     ports:
       - 27017:27017
 
